@@ -1,0 +1,284 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+  background: #f4f7fb;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef4ff 0%, #f7f9fc 100%);
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.auth-card h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-form input,
+.message-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+}
+
+.auth-form button,
+.message-form button,
+.logout-button {
+  border: none;
+  border-radius: 12px;
+  padding: 13px 16px;
+  background: #1d4ed8;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 0.95rem;
+}
+
+.auth-footer {
+  margin-top: 18px;
+  color: #4b5563;
+}
+
+.chat-page {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  margin-bottom: 18px;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+}
+
+.topbar p {
+  color: #6b7280;
+}
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+  min-height: calc(100vh - 126px);
+}
+
+.sidebar,
+.chat-main {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-list {
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.user-card {
+  width: 100%;
+  border: none;
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.user-card.active {
+  background: #dbeafe;
+}
+
+.user-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-meta,
+.last-message,
+.chat-header p,
+.empty-state {
+  color: #6b7280;
+}
+
+.last-message {
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.online {
+  background: #22c55e;
+}
+
+.status-dot.offline {
+  background: #9ca3af;
+}
+
+.unread-badge {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+}
+
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-window,
+.chat-placeholder {
+  flex: 1;
+  padding: 22px;
+}
+
+.chat-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100vh - 280px);
+  overflow-y: auto;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 12px 14px;
+  border-radius: 16px;
+}
+
+.message-bubble p {
+  margin-bottom: 4px;
+}
+
+.message-bubble span {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.message-bubble.sent {
+  align-self: flex-end;
+  background: #dbeafe;
+}
+
+.message-bubble.received {
+  align-self: flex-start;
+  background: #f3f4f6;
+}
+
+.message-form {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+@media (max-width: 900px) {
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .messages {
+    max-height: 420px;
+  }
+}
+
