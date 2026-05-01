@@ -185,15 +185,3 @@ Main events used:
 - `mark-as-read`
 - `messages-read`
 
-## Interview Talking Points
-
-- How JWT protects private routes
-- Why Socket.io is used for instant messaging
-- How presence is tracked using connection and disconnection events
-- Why message history is still fetched from MongoDB even with real-time sockets
-- How the conversation list is built from stored messages
-
-## Notes
-
-- This project keeps the structure modular, but intentionally avoids heavy abstraction.
-- The UI is simple and functional so the focus stays on authentication, APIs, sockets, and persistence.
