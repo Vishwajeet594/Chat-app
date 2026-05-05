@@ -1,17 +1,20 @@
 # Real-Time Chat Application (MERN + Socket.io)
 
-This is a simple real-time chat application built with the MERN stack and Socket.io. It is designed like a practical student project: clean structure, clear APIs, easy-to-follow code, and enough real-time logic to discuss confidently in an interview.
+This project is a practical full-stack chat app built with the MERN stack, Socket.io, MongoDB, Cloudinary, and WebRTC. It keeps the structure simple enough for a student project, but now covers richer real-time features that are useful in interviews and portfolio demos.
 
 ## Features
 
-- User registration and login with JWT authentication
-- Password hashing with `bcryptjs`
-- One-to-one real-time messaging using Socket.io
-- Online and offline presence tracking
-- Messages stored in MongoDB
-- Chat history loading from the database
-- Conversation list with last message and unread count
-- Protected backend routes
+- JWT-based signup and login
+- One-to-one real-time messaging
+- Group chat creation and member management
+- Message persistence in MongoDB
+- Typing indicators
+- Real-time sent, delivered, and seen states
+- Emoji reactions on messages
+- File, image, and voice-note sharing through Cloudinary
+- Unread chat badges and browser notifications
+- Online/offline presence tracking
+- Peer-to-peer audio and video calling with WebRTC signaling over Socket.io
 
 ## Tech Stack
 
@@ -19,12 +22,15 @@ This is a simple real-time chat application built with the MERN stack and Socket
 - Vite
 - Node.js
 - Express
-- MongoDB
+- MongoDB Atlas or local MongoDB
 - Mongoose
 - Socket.io
 - JWT
 - bcryptjs
+- Cloudinary
+- Multer
 - Axios
+- WebRTC
 
 ## Project Structure
 
@@ -49,61 +55,61 @@ client/
 
 ## Setup
 
-### 1. Clone or open the project
-
-Use this workspace as-is.
-
-### 2. Backend setup
+### 1. Backend install
 
 ```bash
 cd server
 npm install
 ```
 
-Create a `.env` file in `server/` using `server/.env.example`.
+Create `server/.env` from `server/.env.example`.
 
 Example:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/mern_chat_app
+MONGO_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/mern_chat_app?retryWrites=true&w=majority
 JWT_SECRET=replace_with_a_long_secret_key
 CLIENT_URL=http://localhost:5173
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-### 3. Frontend setup
+### 2. Frontend install
 
 ```bash
 cd client
 npm install
 ```
 
-Create a `.env` file in `client/` using `client/.env.example`.
-
-Example:
+Create `client/.env` from `client/.env.example`.
 
 ```env
 VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
 ```
 
-### 4. Run the backend
+### 3. Run the app
+
+Backend:
 
 ```bash
 cd server
 npm run dev
 ```
 
-### 5. Run the frontend
+Frontend:
 
 ```bash
 cd client
 npm run dev
 ```
 
-The frontend runs on `http://localhost:5173` and the backend runs on `http://localhost:5000`.
+Frontend URL: `http://localhost:5173`  
+Backend URL: `http://localhost:5000`
 
-## API Endpoints
+## Main REST APIs
 
 ### Auth
 
@@ -114,74 +120,57 @@ The frontend runs on `http://localhost:5173` and the backend runs on `http://loc
 
 - `GET /api/users`
 
-### Chats and Messages
+### Chats
 
-- `GET /api/chats/:userId`
+- `GET /api/chats`
+- `POST /api/chats/direct`
+- `POST /api/chats/group`
+- `PATCH /api/chats/:chatId/members`
+- `DELETE /api/chats/:chatId/members/:memberId`
+
+### Messages
+
+- `GET /api/messages/chat/:chatId`
 - `GET /api/messages/:user1/:user2`
-- `GET /api/messages/conversations/list`
 - `POST /api/messages`
-- `PATCH /api/messages/read/:userId`
+- `PATCH /api/messages/read/:chatId`
+- `PATCH /api/messages/:messageId/reactions`
 
-## Sample Request Examples
+### Uploads
 
-### Register
+- `POST /api/uploads`
 
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "name": "Rahul",
-  "email": "rahul@example.com",
-  "password": "123456"
-}
-```
-
-### Login
-
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "rahul@example.com",
-  "password": "123456"
-}
-```
-
-### Send Message
-
-```http
-POST /api/messages
-Authorization: Bearer YOUR_JWT_TOKEN
-Content-Type: application/json
-
-{
-  "receiverId": "665f31edb7d9fe000ab12345",
-  "message": "Hello there"
-}
-```
-
-### Get Chat History
-
-```http
-GET /api/chats/665f31edb7d9fe000ab12345
-Authorization: Bearer YOUR_JWT_TOKEN
-```
-
-## Socket Flow
-
-The app connects to Socket.io after login using the JWT token.
-
-Main events used:
+## Socket Events
 
 - `connection`
 - `disconnect`
-- `user-online`
-- `user-offline`
-- `online-users`
+- `join-chat`
+- `typing-start`
+- `typing-stop`
 - `send-message`
-- `receive-message`
-- `mark-as-read`
-- `messages-read`
+- `new-message`
+- `message-status-updated`
+- `mark-chat-seen`
+- `messages-seen`
+- `react-message`
+- `message-reaction-updated`
+- `chat-notification`
+- `call-user`
+- `incoming-call`
+- `answer-call`
+- `call-answered`
+- `ice-candidate`
+- `end-call`
+
+## Demo Flow
+
+1. Sign up two different users.
+2. Start a direct chat and send text messages.
+3. Share an image or file.
+4. Hold a key in the input to show typing.
+5. Open the same app in a second browser window to test delivered and seen states.
+6. Create a group and add/remove members as the group admin.
+7. React to messages with emojis.
+8. Record and send a voice note.
+9. Start an audio or video call between two logged-in users.
 
