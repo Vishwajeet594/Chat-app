@@ -64,17 +64,7 @@ npm install
 
 Create `server/.env` from `server/.env.example`.
 
-Example:
 
-```env
-PORT=5000
-MONGO_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/mern_chat_app?retryWrites=true&w=majority
-JWT_SECRET=replace_with_a_long_secret_key
-CLIENT_URL=http://localhost:5173
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
 
 ### 2. Frontend install
 
